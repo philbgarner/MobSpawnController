@@ -6,7 +6,7 @@
 
     <groupId>com.gmail.philbgarner</groupId>
     <artifactId>MobSpawnController</artifactId>
-    <version>0.1-alpha-1</version>
+    <version>v0.1-alpha-1</version>
     <build>
         <plugins>
             <plugin>
