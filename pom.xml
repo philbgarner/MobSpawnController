@@ -38,6 +38,13 @@
             <version>1.16.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>dansplugins</groupId>
+            <artifactId>Medieval-Factions</artifactId>
+            <version>v4.3</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/dependencies/Medieval-Factions-v4.3.jar</systemPath>
+        </dependency>
     </dependencies>
 
 </project>

@@ -3,3 +3,4 @@ version: 0.1
 main: mobspawncontroller.MobSpawnController
 api-version: 1.16
 depend: [MedievalFactions]
+authors: [Caibinus, DanTheTechMan]
