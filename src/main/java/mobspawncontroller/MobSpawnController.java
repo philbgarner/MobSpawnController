@@ -1,14 +1,13 @@
 package mobspawncontroller;
 
-import dansplugins.factionsystem.MedievalFactions;
+import dansplugins.factionsystem.externalapi.MedievalFactionsAPI;
+import mobspawncontroller.integrators.MedievalFactionsIntegrator;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -18,17 +17,33 @@ public class MobSpawnController extends JavaPlugin {
     public static int SpawnLocationAttemptLimit = 5;
     public static float ChunkChanceAttemptSpawn = 0.005f;
     private static MobSpawnController instance = null;
-    private static MedievalFactions mfinstance = null;
-
-    public static MedievalFactions getMfInstance() {
-        if (mfinstance == null) {
-            mfinstance = MedievalFactions.getInstance();
-        }
-        return mfinstance;
-    }
 
     public static MobSpawnController getInstance() {
         return instance;
+    }
+
+    public MedievalFactionsAPI get_MF_API() {
+        return MedievalFactionsIntegrator.getInstance().getAPI();
+    }
+
+    @Override
+    public void onEnable() {
+        System.out.println(("--- Enabling CustomMobSpawning ------ "));
+
+        instance = this;
+
+
+
+        getServer().getPluginManager().registerEvents(new EventHandlers(), this);
+
+        if (!MedievalFactionsIntegrator.getInstance().isMedievalFactionsPresent()) {
+            System.out.println("Medieval Factions is not present. Mob Spawn Controller cannot run.");
+        }
+    }
+
+    @Override
+    public void onDisable() {
+        System.out.println(("--- Disabling CustomMobSpawning --------"));
     }
 
     private boolean rollPassed(float chance) {
@@ -284,20 +299,7 @@ public class MobSpawnController extends JavaPlugin {
 
     }
 
-    @Override
-    public void onEnable() {
-        System.out.println(("--- Enabling CustomMobSpawning ------ "));
-
-        instance = this;
-        mfinstance = MedievalFactions.getInstance();
-
-        getServer().getPluginManager().registerEvents(new EventHandlers(), this);
-
+    public boolean isDebugEnabled() {
+        return true;
     }
-
-    @Override
-    public void onDisable() {
-        System.out.println(("--- Disabling CustomMobSpawning --------"));
-    }
-
 }
